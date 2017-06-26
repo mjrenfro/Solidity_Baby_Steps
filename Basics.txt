@@ -1,0 +1,134 @@
+#Digestion of https://solidity.readthedocs.io/en/develop/structure-of-a-contract.html
+
+Structure of a Contract
+
+Contract ~ class
+
+What A Contract Contains:
+  -State variables,
+  -Functions
+  -Function Modifiers
+  -Struct Types
+  -Enum Types
+
+State Variables = values that are permanently stored in contract storage
+
+This kind of storage is persistant between function calls and expensive to use.
+
+Example
+
+  pragma solidity ^0.4.0;
+  contract SimpleStorage {
+    uint storedData; //<----state var
+  }
+
+Functions
+  Be internal, external
+  Different levels of visibility
+
+Function Modifiers = used to easily change the behavior of functions
+
+contract deposit {
+  address payer;
+  function () {
+    payer = msg.sender;
+  }
+
+  //When used in other contracts, the function body is inserted where
+  //the special symbol "_;" is in the definition of the modifier
+  modifier onlyPayer {
+    require(msg.sender ==payable);
+    _;
+  }
+}
+
+contract bank is deposit {
+  //self destruct is only called if this methods is call by the
+  //stored payer
+  function close() onlyPayer{
+    selfdestruct(payer)
+  }
+}
+
+Constant State Variable = must be assigned from an expression that is constant at
+compile time
+
+  #Any expression that accesses storage, blockchain data(now, this.balance, block.number)
+  #will not be allowed as a constant
+
+Side effects in memory (not storage) is okay
+Someday is should be possible to construct complex objects like lookup table
+
+Only value types (uint, bytes32) and strings are allowed at this time.
+
+Constant Functions = will not modify the state
+
+Example
+
+contract C {
+  function f(uint a, uint b) constant returns (uint){
+    return a * (b+42);
+  }
+}
+
+Fallback Function = Cannot have arguments nor return values.
+
+Executed when none of the other functions match the given function identifier
+
+Also executed when the contract receives plain Ether (without data).
+
+Very little gas is allocated for the fallback function (2300 gas)
+
+The following events would be impossible for the fallback function
+to perform
+
+  -Writing to storage
+  -Creating a contract
+  -Calling an external function which consumes a large amount of gas
+  -Sending Ether
+
+So what can a fallback function do?
+
+Example pragma solidity ^0.4.0;
+
+contract Test {
+  //This function is called for all messages sent to the contract
+  //since there are no other functions defined
+  //However sending Ether to this contract will cause an exception
+  //because the fallback function does not have the "payable"
+  //modifier
+  function () {x=1;}
+  uint x;
+}
+
+//This contract keeps all Ether sent to it with no way to get it back
+
+contract Sink {
+  function () payable {}
+}
+
+contract Caller {
+  function callTest(Test test){
+    test.call(0xabcdef01); //hash does not exist
+
+
+    //results in test.x becoming ==1
+
+    //The following call will fail reject the Ether and return false
+    test.send(2 ether);
+  }
+
+}
+
+Events == used for EVM loggin facilities and can be used to "call" JavaScript
+callbacks in the user interface of a dapp, which listen for these events
+
+These are inheritable parts of a contract
+Their execution cause the arguments to be stored in the transaction's log
+
+What is the transaction log?
+  -A special data structure in the blockchain. These logs are associated with 
+  the address of the contract and will be incorporated into the blockchain
+  and stay there as long as a block is accessible
+
+  Seems like it's hard to locate a specific logged event

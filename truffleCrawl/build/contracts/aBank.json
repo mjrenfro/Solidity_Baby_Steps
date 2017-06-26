@@ -1,0 +1,42 @@
+{
+  "contract_name": "aBank",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "amt",
+          "type": "uint256"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000c57fe5b5b60c68061001b6000396000f300606060405263ffffffff60e060020a60003504166312065fe08114602a578063b6b55f25146049575bfe5b3415603157fe5b6037605b565b60408051918252519081900360200190f35b3415605057fe5b60596004356078565b005b600160a060020a0333166000908152602081905260409020545b90565b600160a060020a03331660009081526020819052604090208054820190555b505600a165627a7a72305820461e02994e15aa994f52fe51be8ea107da57ec23593b6183abbd0b9f90fa8bc60029",
+  "networks": {
+    "1498453000815": {
+      "events": {},
+      "links": {},
+      "address": "0xb0e7fae0a56e88cd6ea0245e20535823cd47828e",
+      "updated_at": 1498453463778
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1498453463778
+}
