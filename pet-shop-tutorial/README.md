@@ -1,9 +1,9 @@
-Following along the Truffle made tutorial here:
+#Following along the Truffle made tutorial here:
 
 http://truffleframework.com/tutorials/pet-shop
 
 
-Learned stages 
+#Learned stages 
 
    All parts must be in their respective folders for truffle to perform the desired
    operation.
@@ -24,4 +24,5 @@ Learned stages
   
       truffle test 
       
+
   
