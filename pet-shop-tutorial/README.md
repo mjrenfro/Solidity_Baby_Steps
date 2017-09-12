@@ -27,10 +27,10 @@ http://truffleframework.com/tutorials/pet-shop
       truffle test 
 
 ### Serving the Smart Contracts using Web3
-
-   'dev' is an alias for 'lite-server'
+   -'dev' is an alias for 'lite-server'
+   
    -Start up the lite-server so that localhost:3000 shows the DApp
-        
-        npm run dev
+      
+       npm run dev
 
   
