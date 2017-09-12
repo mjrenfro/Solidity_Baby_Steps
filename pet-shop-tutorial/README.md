@@ -9,6 +9,7 @@ Learned stages
    operation.
   
   -The local test blockchain must be up and running 
+       
        testrpc
 
   -Compile the smart contracts:
