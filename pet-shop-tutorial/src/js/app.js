@@ -28,7 +28,7 @@ App = {
     if (typeof web3 !== 'undefined')
     {
       App.web3Provider = web3.currentProvider;
-      web= new Web3(web3.currentProvider);
+      web3= new Web3(web3.currentProvider);
 
     }else{
       //set the provider you want from web3.providers
@@ -92,7 +92,7 @@ App = {
         return App.markAdopted();
 
       }).catch(function(err){
-        
+
         console.log(err.message); //if there are errors with the transaction,
                                   //this line will be executed
       });
